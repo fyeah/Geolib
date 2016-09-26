@@ -1107,21 +1107,21 @@
 
             radius = (typeof radius === 'undefined') ? this.radius : Number(radius);
 
-            var δ = Number(distance) / radius; // angular distance in radians
-            var θ = Number(bearing).toRad();
+            var abc1 = Number(distance) / radius; // angular distance in radians
+            var abc2 = Number(bearing).toRad();
 
-            var φ1 = Number(lat).toRad();
-            var λ1 = Number(lng).toRad();
+            var abc3 = Number(lat).toRad();
+            var abc4 = Number(lng).toRad();
 
-            var φ2 = Math.asin( Math.sin(φ1)*Math.cos(δ) +
-                Math.cos(φ1)*Math.sin(δ)*Math.cos(θ) );
-            var λ2 = λ1 + Math.atan2(Math.sin(θ)*Math.sin(δ)*Math.cos(φ1),
-                    Math.cos(δ)-Math.sin(φ1)*Math.sin(φ2));
-            λ2 = (λ2+3*Math.PI) % (2*Math.PI) - Math.PI; // normalise to -180..+180°
+            var abc5 = Math.asin( Math.sin(abc3)*Math.cos(abc1) +
+                Math.cos(abc3)*Math.sin(abc1)*Math.cos(abc2) );
+            var abc6 = abc4 + Math.atan2(Math.sin(abc2)*Math.sin(abc1)*Math.cos(abc3),
+                    Math.cos(abc1)-Math.sin(abc3)*Math.sin(abc5));
+            abc6 = (abc6+3*Math.PI) % (2*Math.PI) - Math.PI; // normalise to -180..+180°
 
             return {
-                latitude: φ2.toDeg(),
-                longitude: λ2.toDeg()
+                latitude: abc5.toDeg(),
+                longitude: abc6.toDeg()
             };
 
         },
